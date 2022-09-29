@@ -36,14 +36,14 @@ export default function roomIdMessageIdRoute(req, res) {
     if (user.isAdmin === true) {
       rooms[Idx].message.splice(Idxmessage, 1);
       writeChatRoomsDB(rooms);
-      return res.status(200).json({ ok: true });
+      return res.json({ ok: true });
     }
     //or if token owner is normal user, they can only delete their own message!
     if (user.isAdmin === false) {
       if (rooms[Idx].messages[Idxmessage].username === user.username) {
         rooms[Idx].message.splice(Idxmessage, 1);
         writeChatRoomsDB(rooms);
-        return res.status(200).json({ ok: true });
+        return res.json({ ok: true });
       } else {
         return res.status(403).json({
           ok: false,
